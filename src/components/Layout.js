@@ -1,14 +1,14 @@
-import React from 'react'
-import Nav from './Nav'
-
+import React from "react";
+import { Outlet } from "react-router-dom";
+import Header from "./Header";
 
 export default function Layout() {
-    return (
-        <div>
-            <Nav></Nav>
-            <div>
-                
-            </div>
-        </div>
-    )
+  return (
+    <div>
+      <Header></Header>
+      <div>
+        <Outlet />
+      </div>
+    </div>
+  );
 }

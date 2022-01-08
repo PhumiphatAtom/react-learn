@@ -7,8 +7,16 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import Home from "./pages/Home";
 import Layout from "./components/Layout";
+import About from "./pages/About";
+import Learn from "./pages/Learn";
+import Learn2 from "./pages/Learn2";
+import Learn3 from "./pages/Learn3";
+import Learn4 from "./pages/Learn4";
 function App() {
   return (
     <Router>
@@ -16,7 +24,11 @@ function App() {
         <Route element={<Layout/>}>
           <Route path="/home" element={<Home />}></Route>
           <Route path="/" element={<Navigate to="/home" />}></Route>
-          <Route path="/about" element={<p>About</p>}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/learn" element={<Learn />}></Route>
+          <Route path="/learn2" element={<Learn2 />}></Route>
+          <Route path="/learn3" element={<Learn3 />}></Route>
+          <Route path="/learn4" element={<Learn4 />}></Route>
         </Route>
       </Routes>
     </Router>
