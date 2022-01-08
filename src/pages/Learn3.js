@@ -1,10 +1,16 @@
-import React from "react";
-import { Button, Card, Form, ListGroup } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button, Card, Form, ListGroup, Modal } from "react-bootstrap";
 
 export default function Learn2() {
   const [title, setTitle] = React.useState("");
   const [open, setOpen] = React.useState([]);
   const [close, setClose] = React.useState([]);
+  const [edit, setEdit] = useState("");
+  const [editIndex, setEditIndex] = useState();
+  //*********Modal*********
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   function handleSubmit() {
     if (title !== "") {
@@ -13,6 +19,35 @@ export default function Learn2() {
     } else {
       alert("กรุณาพิมพ์");
     }
+  }
+
+  function handleMove(item, index) {
+    setClose([...close, item]);
+    const tempOpen = open.filter((item2, index2) => {
+      console.log("index1 : ", index, "index2 :", index2);
+      return index !== index2;
+    });
+    setOpen(tempOpen);
+  }
+
+  function handleDelete(index) {
+    const tempClose = close.filter((item2, index2) => {
+      return index !== index2;
+    });
+    setClose(tempClose);
+  }
+
+  function handleEditInput(item, index) {
+    setEdit(item);
+    setEditIndex(index);
+  }
+
+  function handleEdit() {
+    let tempOpen = [...open];
+    tempOpen[editIndex] = edit;
+    console.log("tempOpenEdit", tempOpen);
+    setOpen(tempOpen);
+    handleClose();
   }
 
   return (
@@ -73,6 +108,10 @@ export default function Learn2() {
                     variant="warning"
                     size="sm"
                     style={{ marginLeft: "1rem" }}
+                    onClick={() => {
+                      handleShow();
+                      handleEditInput(item, index);
+                    }}
                   >
                     {"Edit"}
                   </Button>
@@ -81,12 +120,7 @@ export default function Learn2() {
                     variant="success"
                     size="sm"
                     onClick={() => {
-                      setClose([...close, item]);
-                      const tempOpen = open.filter((item2, index2) => {
-                        console.log("index1 : ", index, "index2 :", index2);
-                        return index !== index2;
-                      });
-                      setOpen(tempOpen);
+                      handleMove(item, index);
                     }}
                   >
                     {">>"}
@@ -121,10 +155,7 @@ export default function Learn2() {
                   style={{ marginLeft: "1rem" }}
                   size="sm"
                   onClick={() => {
-                    const tempClose = close.filter((item2, index2) => {
-                      return index !== index2;
-                    });
-                    setClose(tempClose);
+                    handleDelete(index);
                   }}
                 >
                   Del
@@ -134,6 +165,45 @@ export default function Learn2() {
           </ListGroup>
         </Card>
       </div>
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal title</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>
+          <Form style={{ width: "18rem" }}>
+            <Form.Group className="mb-3">
+              <Form.Label>Edit Title</Form.Label>
+              <Form.Control
+                value={edit}
+                type="text"
+                onKeyPress={(e) => {
+                  if (e.key === "Enter") {
+                    e.preventDefault();
+                  }
+                }}
+                onChange={(e) => {
+                  setEdit(e.target.value);
+                }}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Close
+          </Button>
+          <Button
+            variant="primary"
+            onClick={() => {
+              handleEdit();
+            }}
+          >
+            Save changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }
