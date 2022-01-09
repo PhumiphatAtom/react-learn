@@ -18,8 +18,8 @@ export default function Header() {
       <NavDropdown title="Learn" id="basic-nav-dropdown">
           <NavDropdown.Item as={Link} to="/learn">Counter</NavDropdown.Item>
           <NavDropdown.Item as={Link} to="/learn2">{"To do list (create, move, delete)"}</NavDropdown.Item>
-          <NavDropdown.Item as={Link} to="/learn3">{"To do list (edit)"}</NavDropdown.Item>
-          <NavDropdown.Item as={Link} to="/learn4">Learn 4</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to="/learn3">{"To do list (edit open)"}</NavDropdown.Item>
+          <NavDropdown.Item as={Link} to="/learn4">{"To do list (edit close)"}</NavDropdown.Item>
 
           {/* <NavDropdown.Divider /> */}
         </NavDropdown>

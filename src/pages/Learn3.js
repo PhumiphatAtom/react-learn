@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Button, Card, Form, ListGroup, Modal } from "react-bootstrap";
 
-export default function Learn2() {
+export default function Learn3() {
   const [title, setTitle] = React.useState("");
   const [open, setOpen] = React.useState([]);
   const [close, setClose] = React.useState([]);
