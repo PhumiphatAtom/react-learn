@@ -4,49 +4,6 @@ import CardListTodo from '../components/CardListTodo';
 
 export default function Learn4New2() {
   const [title, setTitle] = React.useState('');
-  const [open, setOpen] = React.useState([]);
-  const [close, setClose] = React.useState([]);
-  const [edit, setEdit] = useState('');
-  const [editIndex, setEditIndex] = useState();
-  //**********Modal**********
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
-
-  //*********Modal 1*********
-  const [show2, setShow2] = useState(false);
-  const handleClose2 = () => setShow2(false);
-  const handleShow2 = () => setShow2(true);
-
-  function handleDelete(index) {
-    const tempClose = close.filter((item2, index2) => {
-      return index !== index2;
-    });
-    setClose(tempClose);
-  }
-
-  function handleEditInput(item, index) {
-    setEdit(item);
-    setEditIndex(index);
-  }
-
-  function handleEditOpen() {
-    let tempOpen = [...open];
-    tempOpen[editIndex] = edit;
-    console.log('tempOpenEdit', tempOpen);
-    setOpen(tempOpen);
-    handleClose();
-  }
-
-  function handleEditClose() {
-    let tempClose = [...close];
-    tempClose[editIndex] = edit;
-    console.log('tempCloseEdit', tempClose);
-    setClose(tempClose);
-    handleClose2();
-  }
-  // ----
-
   const [card, setCard] = useState({
     Open: {
       data: [],
@@ -62,9 +19,10 @@ export default function Learn4New2() {
     },
     Done: {
       data: [],
-      targetName: 'Open',
+      targetName: '',
     },
   });
+
   function handleSubmit() {
     if (title !== '') {
       // setOpen([...open, title]);
@@ -93,6 +51,14 @@ export default function Learn4New2() {
 
     setCard(tempCard);
   }
+
+  const handleSubmitEdit = (data) => {
+    //{ name, index: editIndex, newValue: edit }
+    let tempCard = { ...card };
+    let dataArr = tempCard[data.name].data;
+    dataArr[data.index] = data.newValue;
+    setCard(tempCard);
+  };
 
   return (
     <div style={{ padding: '1rem' }}>
@@ -133,88 +99,10 @@ export default function Learn4New2() {
             data={value.data}
             targetName={value.targetName}
             onMove={handleMove}
+            onSubmitEdit={handleSubmitEdit}
           />
         ))}
       </div>
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          <Form style={{ width: '18rem' }}>
-            <Form.Group className="mb-3">
-              <Form.Label>Edit Title</Form.Label>
-              <Form.Control
-                value={edit}
-                type="text"
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault(); //ไม่ให้รีเฟรสเว็บ
-                  }
-                }}
-                onChange={(e) => {
-                  setEdit(e.target.value);
-                }}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button
-            variant="primary"
-            onClick={() => {
-              handleEditOpen();
-            }}
-          >
-            Save changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-
-      <Modal show={show2} onHide={handleClose2}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal title</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>
-          <Form style={{ width: '18rem' }}>
-            <Form.Group className="mb-3">
-              <Form.Label>Edit Title</Form.Label>
-              <Form.Control
-                value={edit}
-                type="text"
-                onKeyPress={(e) => {
-                  if (e.key === 'Enter') {
-                    e.preventDefault(); //ไม่ให้รีเฟรสเว็บ
-                  }
-                }}
-                onChange={(e) => {
-                  setEdit(e.target.value);
-                }}
-              />
-            </Form.Group>
-          </Form>
-        </Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button
-            variant="primary"
-            onClick={() => {
-              handleEditClose();
-            }}
-          >
-            Save changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 }
