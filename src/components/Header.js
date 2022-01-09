@@ -1,6 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { Nav, NavDropdown } from "react-bootstrap";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { Nav, NavDropdown } from 'react-bootstrap';
 
 export default function Header() {
   return (
@@ -16,13 +16,27 @@ export default function Header() {
         </Nav.Link>
       </Nav.Item>
       <NavDropdown title="Learn" id="basic-nav-dropdown">
-          <NavDropdown.Item as={Link} to="/learn">Counter</NavDropdown.Item>
-          <NavDropdown.Item as={Link} to="/learn2">{"To do list (create, move, delete)"}</NavDropdown.Item>
-          <NavDropdown.Item as={Link} to="/learn3">{"To do list (edit open)"}</NavDropdown.Item>
-          <NavDropdown.Item as={Link} to="/learn4">{"To do list (edit close)"}</NavDropdown.Item>
+        <NavDropdown.Item as={Link} to="/learn">
+          Counter
+        </NavDropdown.Item>
+        <NavDropdown.Item as={Link} to="/learn2">
+          {'To do list (create, move, delete)'}
+        </NavDropdown.Item>
+        <NavDropdown.Item as={Link} to="/learn3">
+          {'To do list (edit open)'}
+        </NavDropdown.Item>
+        <NavDropdown.Item as={Link} to="/learn4">
+          {'To do list (edit close)'}
+        </NavDropdown.Item>
+        <NavDropdown.Item as={Link} to="/learn4New">
+          {'To do list (edit close) New'}
+        </NavDropdown.Item>
+        <NavDropdown.Item as={Link} to="/learn4New2">
+          {'To do list (edit close) New2'}
+        </NavDropdown.Item>
 
-          {/* <NavDropdown.Divider /> */}
-        </NavDropdown>
+        {/* <NavDropdown.Divider /> */}
+      </NavDropdown>
     </Nav>
     // <div>
     //   <div>
